@@ -1,0 +1,53 @@
+<ui:composition template="/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <ui:define name="content">
+
+        <section class="card">
+            <h2>Berichte</h2>
+
+            <!-- Mindestbestand-Warnung -->
+            <h:panelGroup rendered="#{stockMovementBean.lowStockMovements.size() gt 0}">
+                <div class="warning-box">
+                    ⚠ Achtung: Es gibt #{stockMovementBean.lowStockMovements.size()} Bestandsbewegungen bei Artikeln unter Mindestbestand.
+                </div>
+                <br/>
+            </h:panelGroup>
+
+            <!-- Bestandsbewegungen anzeigen -->
+            <h:dataTable value="#{stockMovementBean.lowStockMovements}" var="movement" styleClass="data-table">
+
+                <h:column>
+                    <f:facet name="header">Artikelname</f:facet>
+                    #{movement.articleName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Menge</f:facet>
+                    #{movement.quantity}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Bewegungstyp</f:facet>
+                    #{movement.movementType}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Bemerkung</f:facet>
+                    #{movement.note}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Datum und Uhrzeit</f:facet>
+                    #{movement.timestamp}
+                </h:column>
+
+            </h:dataTable>
+
+        </section>
+
+    </ui:define>
+</ui:composition>

@@ -46,4 +46,8 @@ public class StockMovementBean {
         stockMovementService.createMovement(newMovement);
         return "stockmovements?faces-redirect=true";
     }
+
+    public List<StockMovementDTO> getLowStockMovements() {
+        return stockMovementService.findLowStockMovements();
+    }
 }

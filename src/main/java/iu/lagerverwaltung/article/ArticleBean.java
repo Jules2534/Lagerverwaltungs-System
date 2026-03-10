@@ -17,14 +17,6 @@ public class ArticleBean {
 
     private ArticleDTO newArticle = new ArticleDTO();
 
-    public ArticleDTO getNewArticle() {
-        return newArticle;
-    }
-
-    public void setNewArticle(ArticleDTO newArticle) {
-        this.newArticle = newArticle;
-    }
-
     public List<ArticleDTO> getArticles() {
         return articleService.findAll();
     }

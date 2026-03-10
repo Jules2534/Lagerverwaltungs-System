@@ -80,4 +80,12 @@ public class StockMovementService {
 
         return dto;
     }
+
+    // Methode zum Abrufen der Bestandsbewegungen mit niedrigem Bestand
+    public List<StockMovementDTO> findLowStockMovements() {
+        return stockMovementRepository.findAll().stream()
+                .filter(sm -> sm.getArticle().getStock() < sm.getArticle().getMinStock())
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
 }

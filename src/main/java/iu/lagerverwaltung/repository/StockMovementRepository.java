@@ -14,6 +14,20 @@ public class StockMovementRepository {
     private final EntityManagerFactory emf =
             Persistence.createEntityManagerFactory("lagerverwaltungssystemPU");
 
+    public List<StockMovement> findByArticleId(Long articleId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery(
+                            "SELECT sm FROM StockMovement sm WHERE sm.article.id = :articleId ORDER BY sm.timestamp DESC",
+                            StockMovement.class
+                    )
+                    .setParameter("articleId", articleId)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public List<StockMovement> findAll() {
         EntityManager em = emf.createEntityManager();
         try {
