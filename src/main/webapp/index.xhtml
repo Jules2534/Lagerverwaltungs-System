@@ -8,6 +8,21 @@
 
     <ui:define name="content">
 
+        <section class="card">
+            <h2>Startseite</h2>
+
+            <div style="font-size:18px; margin-top:20px;">
+
+                <span>Anzahl der Artikel: #{homeBean.totalArticles}</span>
+
+                <span style="margin-left:40px;">Unter Mindestbestand: #{homeBean.articlesBelowMinimum}</span>
+
+                <span style="margin-left:40px;">Über Mindestbestand: #{homeBean.articlesAboveMinimum}</span>
+
+            </div>
+
+        </section>
+
     </ui:define>
 
 </ui:composition>
