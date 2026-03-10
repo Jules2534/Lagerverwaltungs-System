@@ -1,11 +1,7 @@
 package iu.lagerverwaltung.usermanagement;
 
 import iu.lagerverwaltung.dto.UserRegistrationDTO;
-import iu.lagerverwaltung.event.Event;
-import iu.lagerverwaltung.eventsignup.EventSignup;
-import iu.lagerverwaltung.session.Session;
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +24,15 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @OneToMany(mappedBy = "warehouseOperator")
-    private List<Event> organizedEvents = new ArrayList<>();
+    // Entfernte Beziehungen zu Event, Session und EventSignup
+    // @OneToMany(mappedBy = "warehouseOperator")
+    // private List<Event> organizedEvents = new ArrayList<>();
 
-    @OneToMany(mappedBy = "warehouseOperator")
-    private List<Session> organizedSessions = new ArrayList<>();
+    // @OneToMany(mappedBy = "warehouseOperator")
+    // private List<Session> organizedSessions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EventSignup> eventSignups = new ArrayList<>();
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<EventSignup> eventSignups = new ArrayList<>();
 
     public User() {}
 
@@ -128,30 +125,6 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
-    }
-
-    public List<Event> getOrganizedEvents() {
-        return organizedEvents;
-    }
-
-    public void setOrganizedEvents(List<Event> organizedEvents) {
-        this.organizedEvents = organizedEvents;
-    }
-
-    public List<Session> getOrganizedSessions() {
-        return organizedSessions;
-    }
-
-    public void setOrganizedSessions(List<Session> organizedSessions) {
-        this.organizedSessions = organizedSessions;
-    }
-
-    public List<EventSignup> getEventSignups() {
-        return eventSignups;
-    }
-
-    public void setEventSignups(List<EventSignup> eventSignups) {
-        this.eventSignups = eventSignups;
     }
 
     public Long getId() { return id;}
