@@ -8,6 +8,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.util.Collections;
 import java.util.List;
 
 @Named
@@ -21,6 +22,7 @@ public class StockMovementBean {
     private ArticleService articleService;
 
     private StockMovementDTO newMovement = new StockMovementDTO();
+    private Long selectedArticle;
 
     public StockMovementDTO getNewMovement() {
         return newMovement;
@@ -28,6 +30,14 @@ public class StockMovementBean {
 
     public void setNewMovement(StockMovementDTO newMovement) {
         this.newMovement = newMovement;
+    }
+
+    public Long getSelectedArticle() {
+        return selectedArticle;
+    }
+
+    public void setSelectedArticle(Long selectedArticle) {
+        this.selectedArticle = selectedArticle;
     }
 
     public List<StockMovementDTO> getMovements() {
@@ -49,5 +59,12 @@ public class StockMovementBean {
 
     public List<StockMovementDTO> getLowStockMovements() {
         return stockMovementService.findLowStockMovements();
+    }
+
+    public List<StockMovementDTO> getStockReportForArticle() {
+        if (selectedArticle == null) {
+            return Collections.emptyList();
+        }
+        return stockMovementService.getStockReportForArticle(selectedArticle);
     }
 }

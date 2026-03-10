@@ -81,6 +81,13 @@ public class StockMovementService {
         return dto;
     }
 
+    // Methode zum Abrufen der Bestandsbewegungen für einen bestimmten Artikel
+    public List<StockMovementDTO> getStockReportForArticle(Long articleId) {
+        return stockMovementRepository.findByArticleId(articleId).stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
     // Methode zum Abrufen der Bestandsbewegungen mit niedrigem Bestand
     public List<StockMovementDTO> findLowStockMovements() {
         return stockMovementRepository.findAll().stream()

@@ -9,6 +9,18 @@
         <section class="card">
             <h2>Berichte</h2>
 
+            <!-- Dropdown für die Artikelauswahl -->
+            <h:form>
+                <h:selectOneMenu value="#{stockMovementBean.selectedArticle}"
+                                 styleClass="form-control">
+                    <f:selectItems value="#{stockMovementBean.articles}"
+                                   var="article"
+                                   itemLabel="#{article.name}"
+                                   itemValue="#{article.id}"/>
+                    <f:ajax render="movementsTable" />
+                </h:selectOneMenu>
+            </h:form>
+
             <!-- Mindestbestand-Warnung -->
             <h:panelGroup rendered="#{stockMovementBean.lowStockMovements.size() gt 0}">
                 <div class="warning-box">
@@ -17,8 +29,11 @@
                 <br/>
             </h:panelGroup>
 
-            <!-- Bestandsbewegungen anzeigen -->
-            <h:dataTable value="#{stockMovementBean.lowStockMovements}" var="movement" styleClass="data-table">
+            <!-- Bestandsbewegungen für den ausgewählten Artikel -->
+            <h:dataTable value="#{stockMovementBean.getStockReportForArticle()}"
+                         var="movement"
+                         styleClass="data-table"
+                         id="movementsTable">
 
                 <h:column>
                     <f:facet name="header">Artikelname</f:facet>
