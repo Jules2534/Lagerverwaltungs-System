@@ -1,0 +1,40 @@
+<ui:composition template="/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <ui:define name="content">
+
+        <section class="card">
+            <h2>Neuen Artikel anlegen</h2>
+
+            <h:form>
+                <h:panelGrid columns="2" columnClasses="label,value">
+
+                    <h:outputLabel for="name" value="Artikelname:" />
+                    <h:inputText id="name" value="#{articleBean.newArticle.name}" required="true" />
+
+                    <h:outputLabel for="articleNumber" value="Artikelnummer:" />
+                    <h:inputText id="articleNumber" value="#{articleBean.newArticle.articleNumber}" required="true" />
+
+                    <h:outputLabel for="description" value="Beschreibung:" />
+                    <h:inputText id="description" value="#{articleBean.newArticle.description}" />
+
+                    <h:outputLabel for="stock" value="Bestand:" />
+                    <h:inputText id="stock" value="#{articleBean.newArticle.stock}" />
+
+                    <h:outputLabel for="minStock" value="Mindestbestand:" />
+                    <h:inputText id="minStock" value="#{articleBean.newArticle.minStock}" />
+
+                </h:panelGrid>
+
+                <br/>
+
+                <h:commandButton value="Artikel speichern"
+                                 action="#{articleBean.saveArticle}"
+                                 styleClass="btn-primary"/>
+            </h:form>
+        </section>
+
+    </ui:define>
+</ui:composition>

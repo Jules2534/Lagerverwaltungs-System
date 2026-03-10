@@ -1,0 +1,49 @@
+<ui:composition template="/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <ui:define name="content">
+
+        <section class="card">
+            <h2>Bestandsbewegungen</h2>
+
+            <h:dataTable value="#{stockMovementBean.movements}" var="movement" styleClass="data-table">
+                <h:column>
+                    <f:facet name="header">Artikel</f:facet>
+                    #{movement.articleName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Typ</f:facet>
+                    #{movement.movementType}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Menge</f:facet>
+                    #{movement.quantity}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Kommentar</f:facet>
+                    #{movement.note}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Zeitpunkt</f:facet>
+                    #{movement.timestamp}
+                </h:column>
+            </h:dataTable>
+
+            <br/>
+
+            <h:form>
+                <h:commandButton value="Bestandsänderung dokumentieren"
+                                 action="stockmovement-form?faces-redirect=true"
+                                 styleClass="btn-primary"/>
+            </h:form>
+        </section>
+
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+  <title>Lagerverwaltungs-System</title>
+  <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+<h:body>
+
+  <header>
+    <h:graphicImage library="images" name="Lagerverwaltung_Logo.png" width="150px"/>
+    <h1>Lagerverwaltungs-System</h1>
+
+    <nav>
+      <!-- Navigation für eingeloggte User -->
+      <h:panelGroup rendered="#{userLoginBean.loggedIn}">
+
+        <h:link value="Start" outcome="/index"/>
+
+        <h:panelGroup rendered="#{userLoginBean.adminOrLagerist}">
+          |
+          <h:link value="Artikel" outcome="/articles"/>
+          |
+          <h:link value="Bestandsbewegungen" outcome="/stockmovements"/>
+          |
+          <h:link value="Berichte" outcome="/reports"/>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{userLoginBean.produktionsplaner}">
+          |
+          <h:link value="Bestand" outcome="/inventory"/>
+        </h:panelGroup>
+
+      </h:panelGroup>
+
+      <!-- Navigation für nicht eingeloggte User -->
+      <h:panelGroup rendered="#{not userLoginBean.loggedIn}">
+        <h:link value="Login" outcome="/login"/>
+        |
+        <h:link value="Registrieren" outcome="/register"/>
+      </h:panelGroup>
+    </nav>
+
+    <br/>
+
+    <h:panelGroup rendered="#{userLoginBean.loggedIn}">
+      Willkommen #{userLoginBean.loggedInUser.username}
+      |
+      Du bist in der Rolle #{userLoginBean.loggedInUser.role}
+      |
+      <h:form style="display:inline">
+        <h:commandLink value="Logout" action="#{userLoginBean.logout}"/>
+      </h:form>
+    </h:panelGroup>
+  </header>
+
+  <main>
+    <ui:insert name="content"/>
+  </main>
+
+  <footer>
+    <p>DSBPIIJEE01 - Programmierung industrieller Informationssysteme mit Java EE - WS 2025/26</p>
+  </footer>
+
+</h:body>
+</html>

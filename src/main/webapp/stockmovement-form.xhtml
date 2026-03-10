@@ -1,0 +1,48 @@
+<ui:composition template="/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+
+    <ui:define name="content">
+
+        <section class="card">
+            <h2>Bestandsänderung dokumentieren</h2>
+
+            <h:form>
+                <h:panelGrid columns="2" columnClasses="label,value">
+
+                    <h:outputLabel for="article" value="Artikel:" />
+                    <h:selectOneMenu id="article" value="#{stockMovementBean.newMovement.articleId}" required="true">
+                        <f:selectItem itemLabel="Bitte wählen" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{stockMovementBean.articles}"
+                                       var="article"
+                                       itemValue="#{article.id}"
+                                       itemLabel="#{article.name} (#{article.articleNumber})"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="movementType" value="Typ:" />
+                    <h:selectOneMenu id="movementType" value="#{stockMovementBean.newMovement.movementType}" required="true">
+                        <f:selectItems value="#{stockMovementBean.movementTypes}" var="type"
+                                       itemValue="#{type.name()}"
+                                       itemLabel="#{type.name()}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="quantity" value="Menge:" />
+                    <h:inputText id="quantity" value="#{stockMovementBean.newMovement.quantity}" required="true" />
+
+                    <h:outputLabel for="note" value="Kommentar:" />
+                    <h:inputText id="note" value="#{stockMovementBean.newMovement.note}" />
+
+                </h:panelGrid>
+
+                <br/>
+
+                <h:commandButton value="Bestandsänderung speichern"
+                                 action="#{stockMovementBean.saveMovement}"
+                                 styleClass="btn-primary"/>
+            </h:form>
+        </section>
+
+    </ui:define>
+</ui:composition>
