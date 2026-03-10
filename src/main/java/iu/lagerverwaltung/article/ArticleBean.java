@@ -7,7 +7,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @RequestScoped
@@ -28,20 +27,6 @@ public class ArticleBean {
 
     public List<ArticleDTO> getArticles() {
         return articleService.findAll();
-    }
-
-    public List<ArticleDTO> getLowStockArticles() {
-        return getArticles().stream()
-                .filter(article -> article.getStock() < article.getMinStock())
-                .collect(Collectors.toList());
-    }
-
-    public int getLowStockCount() {
-        return getLowStockArticles().size();
-    }
-
-    public boolean isBelowMinimum(ArticleDTO article) {
-        return article.getStock() < article.getMinStock();
     }
 
     public String saveArticle() {

@@ -9,14 +9,6 @@
         <section class="card">
             <h2>Aktueller Lagerbestand</h2>
 
-            <!-- Mindestbestand-Warnung -->
-            <h:panelGroup rendered="#{articleBean.lowStockCount gt 0}">
-                <div class="warning-box">
-                    ⚠ Achtung: Es gibt #{articleBean.lowStockCount} Artikel unter Mindestbestand.
-                </div>
-                <br/>
-            </h:panelGroup>
-
             <h:dataTable value="#{articleBean.articles}" var="article" styleClass="data-table">
 
                 <h:column>
@@ -37,18 +29,6 @@
                 <h:column>
                     <f:facet name="header">Mindestbestand</f:facet>
                     #{article.minStock}
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">Status</f:facet>
-
-                    <h:panelGroup rendered="#{articleBean.belowMinimum(article)}">
-                        <span class="status-warning">⚠ Mindestbestand unterschritten</span>
-                    </h:panelGroup>
-
-                    <h:panelGroup rendered="#{not articleBean.belowMinimum(article)}">
-                        <span class="status-ok">OK</span>
-                    </h:panelGroup>
                 </h:column>
 
             </h:dataTable>
