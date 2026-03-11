@@ -24,16 +24,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    // Entfernte Beziehungen zu Event, Session und EventSignup
-    // @OneToMany(mappedBy = "warehouseOperator")
-    // private List<Event> organizedEvents = new ArrayList<>();
-
-    // @OneToMany(mappedBy = "warehouseOperator")
-    // private List<Session> organizedSessions = new ArrayList<>();
-
-    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private List<EventSignup> eventSignups = new ArrayList<>();
-
     public User() {}
 
     public User(String username, String name, String firstname, String email, String location, String state, String password,
